@@ -1,65 +1,66 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { useContext, useEffect, useState } from 'react'
-import { Pressable, Text, View } from 'react-native'
-import { ThemeContext } from '../App'
+import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { ThemeContext } from '../ThemeContext'
 import { getPeople } from '../services'
 
 export const List = () => {
-    const navigation = useNavigation()
-    const route = useRoute()
+    const { navigate } = useNavigation()
+    const { params } = useRoute()
     const style = useContext(ThemeContext)
 
     const [people, setPeople] = useState([])
 
     useEffect(() => {
-        switch (route.params?.action) {
+        switch (params?.action) {
             case 'create':
-                setPeople((prev) => [...prev, route.params.data])
+                setPeople((prev) => [...prev, params.data])
                 break
             case 'update':
-                setPeople((prev) => prev.map((p) => (p._id == route.params.data._id ? route.params.data : p)))
+                setPeople((prev) => prev.map((p) => (p._id == params.data._id ? params.data : p)))
             case 'delete':
-                setPeople((prev) => prev.filter((p) => p._id != route.params.data._id))
+                setPeople((prev) => prev.filter((p) => p._id != params.data._id))
                 break
             default:
                 getPeople().then((json) => setPeople(json))
                 break
         }
-    }, [route.params])
+    }, [params])
 
     return (
-        <View>
+        <View style={style.appBackground}>
             <Pressable
-                onPress={() => navigation.navigate('Create')}
-                style={{ padding: 10, margin: 5, borderColor: '#000', borderWidth: 1 }}
+                onPress={() => navigate('Create')}
+                style={styles.addContactButton}
             >
-                <Text>Add Contact</Text>
+                <Text style={styles.addContactButtonText}>Add Contact</Text>
             </Pressable>
-            {people.map((p) => (
-                <ContactButton
-                    key={p._id}
-                    person={p}
+            {people.map((person) => (
+                <ContactTile
+                    key={person._id}
+                    person={person}
                 />
             ))}
         </View>
     )
 }
 
-const ContactButton = (props) => {
-    const navigation = useNavigation()
+const ContactTile = (props) => {
+    const { navigate } = useNavigation()
     const style = useContext(ThemeContext)
 
-    let p = props.person
+    const { person } = props
+
     return (
-        <View style={style.contactTile}>
+        <View style={styles.contactTile}>
             <Text>
-                {p.firstName} , {p.lastName}
+                {person.lastName}, {person.firstName}
             </Text>
             <View style={{ flexDirection: 'row' }}>
                 <Pressable
-                    onPress={() => navigation.navigate('Details', p)}
-                    style={{ padding: 10, margin: 5, borderColor: '#000', borderWidth: 1 }}
+                    onPress={() => navigate('Details', person)}
+                    style={styles.contactButton}
                 >
                     <MaterialCommunityIcons
                         name='account-details'
@@ -68,8 +69,8 @@ const ContactButton = (props) => {
                     />
                 </Pressable>
                 <Pressable
-                    onPress={() => navigation.navigate('Update', p)}
-                    style={{ padding: 10, margin: 5, borderColor: '#000', borderWidth: 1 }}
+                    onPress={() => navigate('Update', person)}
+                    style={styles.contactButton}
                 >
                     <MaterialCommunityIcons
                         name='account-edit'
@@ -78,8 +79,8 @@ const ContactButton = (props) => {
                     />
                 </Pressable>
                 <Pressable
-                    onPress={() => navigation.navigate('Delete', p)}
-                    style={{ padding: 10, margin: 5, borderColor: '#000', borderWidth: 1 }}
+                    onPress={() => navigate('Delete', person)}
+                    style={styles.contactButton}
                 >
                     <MaterialCommunityIcons
                         name='delete-forever'
@@ -91,3 +92,40 @@ const ContactButton = (props) => {
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    contactTile: {
+        backgroundColor: '#fff',
+        color: '#000',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        padding: 10,
+        margin: 5,
+        borderColor: '#000',
+        borderWidth: 1,
+        borderRadius: 10,
+        shadowOffset: { height: 5, width: 5 },
+        shadowOpacity: 0.4,
+        shadowColor: '#000'
+    },
+    contactButton: {
+        padding: 10,
+        margin: 5,
+        borderColor: '#000',
+        borderWidth: 1,
+        borderRadius: 10
+    },
+    addContactButton: {
+        padding: 10,
+        margin: 5,
+        borderColor: '#000',
+        borderWidth: 1,
+        borderRadius: 10,
+        textAlign: 'center',
+        backgroundColor: '#ff6a00'
+    },
+    addContactButtonText: {
+        fontSize: 32,
+        textAlign: 'center'
+    }
+})

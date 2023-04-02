@@ -1,6 +1,6 @@
-import { useState } from 'react'
-import { View, Text, TextInput, Pressable } from 'react-native'
 import { useNavigation, useRoute } from '@react-navigation/native'
+import { useState } from 'react'
+import { Pressable, Text, TextInput, View } from 'react-native'
 
 export const Update = () => {
     //navigation

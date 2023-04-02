@@ -1,11 +1,9 @@
-import { NavigationContainer, useNavigation } from '@react-navigation/native'
+import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { createContext, useState } from 'react'
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
-import Screens from './screens/index'
-import { login } from './services'
+import { StyleSheet } from 'react-native'
+import { ThemeContext } from './ThemeContext'
+import { Screens } from './screens/index'
 
-export const ThemeContext = createContext()
 const Stack = createNativeStackNavigator()
 
 const App = () => {
@@ -13,13 +11,16 @@ const App = () => {
         <ThemeContext.Provider value={style}>
             <NavigationContainer>
                 <Stack.Navigator initialRouteName='List'>
-                    <Stack.Screen
+                    {/* <Stack.Screen
                         name='Login'
                         component={Login}
-                    />
+                    /> */}
                     <Stack.Screen
                         name='List'
                         component={Screens.List}
+                        // options={{
+                        //     headerTitleAlign: 'center'
+                        // }}
                     />
                     <Stack.Screen
                         name='Create'
@@ -42,50 +43,42 @@ const App = () => {
         </ThemeContext.Provider>
     )
 }
-
 export default App
 
-const Login = () => {
-    const navigation = useNavigation()
-    const [username, setUsername] = useState('Akkad')
-    const [password, setPassword] = useState('password123')
+// const Login = () => {
+//     const navigation = useNavigation()
+//     const [username, setUsername] = useState('Akkad')
+//     const [password, setPassword] = useState('password123')
 
-    const submit = () => {
-        let data = { username, password }
+//     const submit = () => {
+//         let data = { username, password }
 
-        login(data)
-            .then((t) => navigation.navigate('List'))
-            .catch((e) => console.error('Error:', e))
-    }
+//         login(data)
+//             .then((t) => navigation.navigate('List'))
+//             .catch((e) => console.error('Error:', e))
+//     }
 
-    return (
-        <View>
-            <Text>Username</Text>
-            <TextInput
-                onChangeText={setUsername}
-                value={username}
-            />
-            <Text>Password</Text>
-            <TextInput
-                onChangeText={setPassword}
-                value={password}
-            />
-            <Pressable onPress={submit}>
-                <Text>Sign In</Text>
-            </Pressable>
-        </View>
-    )
-}
+//     return (
+//         <View>
+//             <Text>Username</Text>
+//             <TextInput
+//                 onChangeText={setUsername}
+//                 value={username}
+//             />
+//             <Text>Password</Text>
+//             <TextInput
+//                 onChangeText={setPassword}
+//                 value={password}
+//             />
+//             <Pressable onPress={submit}>
+//                 <Text>Sign In</Text>
+//             </Pressable>
+//         </View>
+//     )
+// }
 
 const style = StyleSheet.create({
-    contactTile: {
-        backgroundColor: 'green',
-        color: '#000',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        padding: 10,
-        margin: 5,
-        borderColor: '#000',
-        borderWidth: 1
+    appBackground: {
+        backgroundColor: '#fff'
     }
 })

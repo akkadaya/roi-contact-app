@@ -1,5 +1,5 @@
-import { View, Text, Pressable } from 'react-native'
-import { useRoute, useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
+import { Pressable, Text, View } from 'react-native'
 
 export const Delete = () => {
     const route = useRoute()

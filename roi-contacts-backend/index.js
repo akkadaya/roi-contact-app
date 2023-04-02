@@ -4,9 +4,9 @@
     const cors = require('cors')
     const { MongoClient, ObjectId } = require('mongodb')
 
-    const jwt = require('jsonwebtoken')
+    // const jwt = require('jsonwebtoken')
     const bcrypt = require('bcrypt')
-    const secret = '123'
+    // const secret = '123'
 
     const app = express()
 

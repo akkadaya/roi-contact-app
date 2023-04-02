@@ -4,6 +4,4 @@ import { Details } from './Details'
 import { List } from './List'
 import { Update } from './Update'
 
-const Screens = { Create, Delete, Details, List, Update }
-
-export default Screens
+export const Screens = { Create, Delete, Details, List, Update }
