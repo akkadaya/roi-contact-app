@@ -9,15 +9,17 @@ export const Delete = () => {
     const navigation = useNavigation()
 
     const submit = () => {
-        deletePerson(person._id)
+        deletePerson(person?._id)
             .then((r) => navigation.navigate('List', { action: 'delete', data: person }))
+            .then(alert(`${person.name} Deleted successfully!`))
             .catch((e) => console.error(e.message))
     }
 
     return (
         <View style={styles.contentContainer}>
             <Text style={styles.deleteMsg}>
-                Are you sure you want to delete {person.firstName} {person.lastName}
+                Are you sure you want to delete {'\n'}
+                {person?.name}?
             </Text>
             <View style={styles.buttons}>
                 <SecondaryButton

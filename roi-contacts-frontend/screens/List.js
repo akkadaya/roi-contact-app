@@ -25,6 +25,7 @@ export const List = () => {
                 getPeople()
                     .then((json) => setPeople(json))
                     .catch((e) => {
+                        alert("Couldn't fetch list of contacts")
                         console.log('Error: ', e)
                     })
                 break

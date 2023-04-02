@@ -34,7 +34,10 @@ export const Create = () => {
         }
 
         createPerson(data)
-            .then((j) => navigation.navigate('List', { data: j, action: 'create' }))
+            .then((p) => {
+                navigation.navigate('List', { data: p, action: 'create' })
+                alert(`${p.name} Created successfully!`)
+            })
             .catch((e) => console.error('Error:', e))
     }
 
