@@ -1,14 +1,12 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { useNavigation, useRoute } from '@react-navigation/native'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
-import { ThemeContext } from '../components/ThemeContext'
 import { getPeople } from '../services'
 
 export const List = () => {
     const { navigate } = useNavigation()
     const { params } = useRoute()
-    const style = useContext(ThemeContext)
 
     const [people, setPeople] = useState([])
 
@@ -34,7 +32,7 @@ export const List = () => {
     }, [params])
 
     return (
-        <>
+        <View style={styles.container}>
             <Pressable
                 onPress={() => navigate('Create')}
                 style={styles.addContactButton}
@@ -42,7 +40,7 @@ export const List = () => {
                 <Text style={styles.addContactButtonText}>Add Contact</Text>
             </Pressable>
             <FlatList
-                style={style.appBackground}
+                style={styles.flatList}
                 data={people}
                 renderItem={({ item }) => (
                     <ContactTile
@@ -52,7 +50,7 @@ export const List = () => {
                 )}
                 keyExtractor={(person) => person._id}
             />
-        </>
+        </View>
     )
 }
 
@@ -60,7 +58,10 @@ const ContactTile = ({ person }) => {
     const { navigate } = useNavigation()
 
     return (
-        <View style={styles.contactTile}>
+        <Pressable
+            style={styles.contactTile}
+            onPress={() => navigate('Details', { person })}
+        >
             <Text style={styles.contactText}>{person.name}</Text>
             <View style={{ flexDirection: 'row' }}>
                 <Pressable
@@ -94,11 +95,20 @@ const ContactTile = ({ person }) => {
                     />
                 </Pressable>
             </View>
-        </View>
+        </Pressable>
     )
 }
 
 const styles = StyleSheet.create({
+    container: {
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        flex: 1
+    },
+    flatList: {
+        width: '100%',
+        borderTopWidth: 1
+    },
     contactTile: {
         backgroundColor: '#fff',
         color: '#000',
@@ -112,7 +122,10 @@ const styles = StyleSheet.create({
         shadowOffset: { height: 5, width: 5 },
         shadowOpacity: 0.4,
         shadowColor: '#000',
-        alignItems: 'center'
+        alignItems: 'center',
+        width: '95%',
+        maxWidth: 600,
+        alignSelf: 'center'
     },
     contactText: {
         fontSize: 18,
@@ -133,7 +146,9 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 10,
         textAlign: 'center',
-        backgroundColor: '#ff6a00'
+        backgroundColor: '#ff6a00',
+        width: '80%',
+        maxWidth: 500
     },
     addContactButtonText: {
         fontSize: 32,

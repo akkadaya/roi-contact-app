@@ -1,9 +1,9 @@
 import { Pressable, StyleSheet, Text } from 'react-native'
 
-export const PrimaryButton = ({ onPress, label }) => {
+export const PrimaryButton = ({ onPress, label, style }) => {
     return (
         <Pressable
-            style={styles.primaryButton}
+            style={{ ...styles.primaryButton, ...style }}
             onPress={onPress}
         >
             <Text

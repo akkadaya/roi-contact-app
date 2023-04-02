@@ -49,7 +49,6 @@ const styles = StyleSheet.create({
         marginTop: StatusBar.currentHeight || 0,
         backgroundColor: '#941a1d',
         justifyContent: 'center'
-        // alignItems: 'center'
     },
     appBackground: {
         backgroundColor: '#fafafa'
@@ -62,6 +61,7 @@ const styles = StyleSheet.create({
         headerTitleStyle: {
             fontWeight: 'bold',
             fontSize: 32
-        }
+        },
+        headerTitleAlign: 'center'
     }
 })

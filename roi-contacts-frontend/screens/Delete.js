@@ -16,25 +16,37 @@ export const Delete = () => {
 
     return (
         <View style={styles.contentContainer}>
-            <Text>
+            <Text style={styles.deleteMsg}>
                 Are you sure you want to delete {person.firstName} {person.lastName}
             </Text>
-            <SecondaryButton
-                onPress={submit}
-                label={'Delete'}
-            />
-            <PrimaryButton
-                onPress={navigation.goBack}
-                label={'Go Back'}
-            />
+            <View style={styles.buttons}>
+                <SecondaryButton
+                    onPress={submit}
+                    label={'Delete'}
+                    style={{ width: '100%' }}
+                />
+                <PrimaryButton
+                    onPress={navigation.goBack}
+                    label={'Go Back'}
+                    style={{ width: '100%' }}
+                />
+            </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     contentContainer: {
+        flex: 1,
+        alignItems: 'center'
+    },
+    deleteMsg: {
+        fontSize: 24,
         marginTop: 20,
-        marginLeft: 20,
+        marginBottom: 20
+    },
+    buttons: {
+        width: '75%',
         alignItems: 'center'
     }
 })
