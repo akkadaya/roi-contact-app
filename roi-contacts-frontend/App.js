@@ -15,10 +15,6 @@ const App = () => {
                         initialRouteName='List'
                         screenOptions={styles.screenOptions}
                     >
-                        {/* <Stack.Screen
-                        name='Login'
-                        component={Login}
-                    /> */}
                         <Stack.Screen
                             name='List'
                             component={Screens.List}

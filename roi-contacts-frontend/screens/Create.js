@@ -21,15 +21,15 @@ export const Create = () => {
 
     const onSave = () => {
         const data = {
-            name: form.name,
-            phone: form.phone,
-            department: form.department,
+            name: form.name.trim(),
+            phone: form.phone.replace(/ /g, ''),
+            department: form.department.trim(),
             address: {
-                street: form.street,
-                city: form.city,
-                state: form.state,
-                postcode: form.postcode,
-                country: form.country
+                street: form.street.trim(),
+                city: form.city.trim(),
+                state: form.state.trim(),
+                postcode: form.postcode.trim(),
+                country: form.country.trim()
             }
         }
 
