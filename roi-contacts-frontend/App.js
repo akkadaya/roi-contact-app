@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { SafeAreaView, StatusBar, StyleSheet } from 'react-native'
-import { ThemeContext } from './ThemeContext'
+import { ThemeContext } from './components/ThemeContext'
 import { Screens } from './screens/index'
 
 const Stack = createNativeStackNavigator()
@@ -46,38 +46,6 @@ const App = () => {
     )
 }
 export default App
-
-// const Login = () => {
-//     const navigation = useNavigation()
-//     const [username, setUsername] = useState('Akkad')
-//     const [password, setPassword] = useState('password123')
-
-//     const submit = () => {
-//         let data = { username, password }
-
-//         login(data)
-//             .then((t) => navigation.navigate('List'))
-//             .catch((e) => console.error('Error:', e))
-//     }
-
-//     return (
-//         <View>
-//             <Text>Username</Text>
-//             <TextInput
-//                 onChangeText={setUsername}
-//                 value={username}
-//             />
-//             <Text>Password</Text>
-//             <TextInput
-//                 onChangeText={setPassword}
-//                 value={password}
-//             />
-//             <Pressable onPress={submit}>
-//                 <Text>Sign In</Text>
-//             </Pressable>
-//         </View>
-//     )
-// }
 
 const styles = StyleSheet.create({
     safeAreaView: {

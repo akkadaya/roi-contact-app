@@ -2,7 +2,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { useContext, useEffect, useState } from 'react'
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
-import { ThemeContext } from '../ThemeContext'
+import { ThemeContext } from '../components/ThemeContext'
 import { getPeople } from '../services'
 
 export const List = () => {
@@ -24,7 +24,11 @@ export const List = () => {
                 setPeople((prev) => prev.filter((p) => p._id != params.data._id))
                 break
             default:
-                getPeople().then((json) => setPeople(json))
+                getPeople()
+                    .then((json) => setPeople(json))
+                    .catch((e) => {
+                        console.log('Error: ', e)
+                    })
                 break
         }
     }, [params])
@@ -54,8 +58,6 @@ export const List = () => {
 
 const ContactTile = ({ person }) => {
     const { navigate } = useNavigation()
-    // const style = useContext(ThemeContext)
-    // const { person } = props
 
     return (
         <View style={styles.contactTile}>

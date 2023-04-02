@@ -27,7 +27,6 @@ export const Update = () => {
 
     const onSave = () => {
         const data = {
-            // _id: person?._id,
             firstName: form.firstName,
             lastName: form.lastName,
             address: {

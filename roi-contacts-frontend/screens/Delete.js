@@ -25,7 +25,6 @@ export const Delete = () => {
             <PrimaryButton
                 onPress={navigation.goBack}
                 label={'Go Back'}
-                // style={{ backgroundColor: 'orange' }}
             />
         </View>
     )
