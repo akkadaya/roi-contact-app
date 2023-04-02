@@ -61,8 +61,8 @@
     //create
     app.post('/contacts', async (request, response) => {
         let person = request.body
-        let hash = await bcrypt.hash(person.password, 10)
-        person.password = hash
+        // let hash = await bcrypt.hash(person.password, 10)
+        // person.password = hash
         let result = await people.insertOne(person)
         response.status(201).json(person)
     })
@@ -73,10 +73,10 @@
         })
         response.sendStatus(200)
     })
-    //update entrie object
+    //update entire object
     app.put('/contacts/:id', async (request, response) => {
         let person = request.body
-        delete person['_id']
+        // delete person['_id']
         let filter = { _id: new ObjectId(request.params.id) }
         let result = await people.updateOne(filter, { $set: person })
         person._id = request.params.id

@@ -5,11 +5,19 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Attach to Hermes",
+      "request": "attach",
+      "type": "reactnativedirect",
+      "cwd": "${workspaceFolder}/roi-contacts-frontend",
+      "port": 19000,
+      "sourceMaps": true
+    },
+    {
       "type": "node",
       "request": "launch",
-      "name": "Launch Program",
+      "name": "Launch Express",
       "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}/server/index.js"
+      "program": "${workspaceFolder}/roi-contacts-backend/index.js"
     }
   ]
 }

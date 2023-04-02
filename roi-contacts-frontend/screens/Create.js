@@ -1,27 +1,30 @@
 import { useNavigation } from '@react-navigation/native'
 import { useState } from 'react'
-import { Pressable, Text, TextInput, View } from 'react-native'
+import { ScrollView, StyleSheet, View } from 'react-native'
+import { PrimaryButton, SecondaryButton } from '../components/Button'
+import { FormField } from '../components/FormField'
 import { createPerson } from '../services'
 
 export const Create = () => {
     const navigation = useNavigation()
 
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const [password, setPassword] = useState('')
-    const [number, setNumber] = useState('')
-    const [street, setStreet] = useState('')
-    const [postcode, setPostcode] = useState('')
+    const [form, setForm] = useState({
+        firstName: '',
+        lastName: '',
+        password: '',
+        number: '',
+        street: '',
+        postcode: ''
+    })
 
-    const save = () => {
-        let data = {
-            firstName,
-            lastName,
-            password,
+    const onSave = () => {
+        const data = {
+            firstName: form.firstName,
+            lastName: form.lastName,
             address: {
-                number,
-                street,
-                postcode
+                number: form.number,
+                street: form.street,
+                postcode: form.postcode
             }
         }
 
@@ -30,44 +33,43 @@ export const Create = () => {
             .catch((e) => console.error('Error:', e))
     }
 
+    const fields = [
+        { label: 'First Name', stateField: 'firstName' },
+        { label: 'Last Name', stateField: 'lastName' },
+        { label: 'Street Number', stateField: 'number' },
+        { label: 'Street Name', stateField: 'street' },
+        { label: 'Postcode', stateField: 'postcode' }
+    ]
+
     return (
-        <View>
-            <Text>First Name:</Text>
-            <TextInput
-                value={firstName}
-                onChangeText={setFirstName}
-            />
+        <ScrollView>
+            <View style={styles.contentContainer}>
+                {fields.map((field, index) => (
+                    <FormField
+                        key={index}
+                        form={form}
+                        setForm={setForm}
+                        label={field.label}
+                        stateField={field.stateField}
+                    />
+                ))}
 
-            <Text>Last Name:</Text>
-            <TextInput
-                value={lastName}
-                onChangeText={setLastName}
-            />
-            <Text>Password:</Text>
-            <TextInput
-                value={password}
-                onChangeText={setPassword}
-            />
-            <Text>ADDRESS:</Text>
-            <Text>Number:</Text>
-            <TextInput
-                value={number}
-                onChangeText={setNumber}
-            />
-            <Text>Street:</Text>
-            <TextInput
-                value={street}
-                onChangeText={setStreet}
-            />
-            <Text>Postcode:</Text>
-            <TextInput
-                value={postcode}
-                onChangeText={setPostcode}
-            />
-
-            <Pressable onPress={save}>
-                <Text>Save</Text>
-            </Pressable>
-        </View>
+                <PrimaryButton
+                    label={'Save'}
+                    onPress={onSave}
+                />
+                <SecondaryButton
+                    label={'Cancel'}
+                    onPress={navigation.goBack}
+                />
+            </View>
+        </ScrollView>
     )
 }
+
+const styles = StyleSheet.create({
+    contentContainer: {
+        marginTop: 20,
+        marginLeft: 20
+    }
+})
