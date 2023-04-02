@@ -18,6 +18,7 @@ const App = () => {
                         <Stack.Screen
                             name='List'
                             component={Screens.List}
+                            options={{ title: 'Contacts List' }}
                         />
                         <Stack.Screen
                             name='Create'
