@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { ScrollView, StyleSheet, View } from 'react-native'
 import { PrimaryButton, SecondaryButton } from '../components/Button'
 import { FormField } from '../components/FormField'
+import { updatePerson } from '../services'
 
 export const Update = () => {
     const navigation = useNavigation()
@@ -10,38 +11,42 @@ export const Update = () => {
     const { person } = route.params
 
     const [form, setForm] = useState({
-        firstName: person?.firstName,
-        lastName: person?.lastName,
-        number: person?.address?.number,
-        street: person?.address?.street,
-        postcode: person?.address?.postcode
+        name: person.name,
+        phone: person.phone,
+        department: person.department,
+        street: person.address.street,
+        city: person.address.city,
+        state: person.address.state,
+        postcode: person.address.postcode,
+        country: person.address.country
     })
 
     const fields = [
-        { label: 'First Name', stateField: 'firstName' },
-        { label: 'Last Name', stateField: 'lastName' },
-        { label: 'Street Number', stateField: 'number' },
-        { label: 'Street Name', stateField: 'street' },
-        { label: 'Postcode', stateField: 'postcode' }
+        { label: 'Full Name', stateField: 'name' },
+        { label: 'Phone', stateField: 'phone' },
+        { label: 'Department', stateField: 'department' },
+        { label: 'Street', stateField: 'street' },
+        { label: 'City', stateField: 'city' },
+        { label: 'State', stateField: 'state' },
+        { label: 'Postcode', stateField: 'postcode' },
+        { label: 'Country', stateField: 'country' }
     ]
 
     const onSave = () => {
         const data = {
-            firstName: form.firstName,
-            lastName: form.lastName,
+            name: form.name,
+            phone: form.phone,
+            department: form.department,
             address: {
-                number: form.number,
                 street: form.street,
-                postcode: form.postcode
+                city: form.city,
+                state: form.state,
+                postcode: form.postcode,
+                country: form.country
             }
         }
 
-        fetch(`http://localhost:3000/contacts/${person._id}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        })
-            .then((response) => response.json())
+        updatePerson(person._id, data)
             .then((p) => navigation.navigate('List', { data: p, action: 'update' }))
             .catch((e) => console.error('Error:', e))
     }

@@ -1,6 +1,7 @@
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { StyleSheet, Text, View } from 'react-native'
 import { PrimaryButton, SecondaryButton } from '../components/Button'
+import { deletePerson } from '../services'
 
 export const Delete = () => {
     const route = useRoute()
@@ -8,7 +9,7 @@ export const Delete = () => {
     const navigation = useNavigation()
 
     const submit = () => {
-        fetch(`http://localhost:3000/contacts/${person._id}`, { method: 'DELETE' })
+        deletePerson(person._id)
             .then((r) => navigation.navigate('List', { action: 'delete', data: person }))
             .catch((e) => console.error(e.message))
     }

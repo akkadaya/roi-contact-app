@@ -61,9 +61,7 @@ const ContactTile = ({ person }) => {
 
     return (
         <View style={styles.contactTile}>
-            <Text style={styles.contactText}>
-                {person.lastName}, {person.firstName}
-            </Text>
+            <Text style={styles.contactText}>{person.name}</Text>
             <View style={{ flexDirection: 'row' }}>
                 <Pressable
                     onPress={() => navigate('Details', { person })}

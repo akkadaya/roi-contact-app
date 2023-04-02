@@ -9,22 +9,27 @@ export const Create = () => {
     const navigation = useNavigation()
 
     const [form, setForm] = useState({
-        firstName: '',
-        lastName: '',
-        password: '',
-        number: '',
+        name: '',
+        phone: '',
+        department: '',
         street: '',
-        postcode: ''
+        city: '',
+        state: '',
+        postcode: '',
+        country: ''
     })
 
     const onSave = () => {
         const data = {
-            firstName: form.firstName,
-            lastName: form.lastName,
+            name: form.name,
+            phone: form.phone,
+            department: form.department,
             address: {
-                number: form.number,
                 street: form.street,
-                postcode: form.postcode
+                city: form.city,
+                state: form.state,
+                postcode: form.postcode,
+                country: form.country
             }
         }
 
@@ -34,11 +39,14 @@ export const Create = () => {
     }
 
     const fields = [
-        { label: 'First Name', stateField: 'firstName' },
-        { label: 'Last Name', stateField: 'lastName' },
-        { label: 'Street Number', stateField: 'number' },
-        { label: 'Street Name', stateField: 'street' },
-        { label: 'Postcode', stateField: 'postcode' }
+        { label: 'Full Name', stateField: 'name' },
+        { label: 'Phone', stateField: 'phone' },
+        { label: 'Department', stateField: 'department' },
+        { label: 'Street', stateField: 'street' },
+        { label: 'City', stateField: 'city' },
+        { label: 'State', stateField: 'state' },
+        { label: 'Postcode', stateField: 'postcode' },
+        { label: 'Country', stateField: 'country' }
     ]
 
     return (
