@@ -47,9 +47,14 @@ export const Update = () => {
         }
 
         updatePerson(person._id, data)
-            .then((p) => navigation.navigate('List', { data: p, action: 'update' }))
-            .then(alert(`${person.name} Updated successfully!`))
-            .catch((e) => console.error('Error:', e))
+            .then((p) => {
+                navigation.navigate('List', { data: p, action: 'update' })
+                alert(`${person.name} Updated successfully!`)
+            })
+            .catch((e) => {
+                alert(e.message)
+                console.log(e.message)
+            })
     }
 
     return (

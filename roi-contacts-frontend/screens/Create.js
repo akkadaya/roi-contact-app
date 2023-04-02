@@ -38,7 +38,10 @@ export const Create = () => {
                 navigation.navigate('List', { data: p, action: 'create' })
                 alert(`${p.name} Created successfully!`)
             })
-            .catch((e) => console.error('Error:', e))
+            .catch((e) => {
+                alert(e.message)
+                console.log(e.message)
+            })
     }
 
     const fields = [

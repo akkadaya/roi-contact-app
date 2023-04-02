@@ -10,9 +10,14 @@ export const Delete = () => {
 
     const submit = () => {
         deletePerson(person?._id)
-            .then((r) => navigation.navigate('List', { action: 'delete', data: person }))
-            .then(alert(`${person.name} Deleted successfully!`))
-            .catch((e) => console.error(e.message))
+            .then((r) => {
+                navigation.navigate('List', { action: 'delete', data: person })
+                alert(`${person.name} Updated successfully!`)
+            })
+            .catch((e) => {
+                alert(e.message)
+                console.log(e.message)
+            })
     }
 
     return (

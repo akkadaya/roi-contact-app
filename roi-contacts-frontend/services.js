@@ -1,3 +1,5 @@
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
 export const createPerson = async (data) =>
     fetch('http://localhost:3000/contacts', {
         method: 'POST',
@@ -17,3 +19,21 @@ export const updatePerson = (id, data) =>
 
 export const deletePerson = (id) =>
     fetch(`http://localhost:3000/contacts/${id}`, { method: 'DELETE' })
+
+export const storeData = async (value) => {
+    try {
+        const jsonValue = JSON.stringify(value)
+        await AsyncStorage.setItem('@contacts_key', jsonValue)
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+export const getData = async () => {
+    try {
+        const jsonValue = await AsyncStorage.getItem('@contacts_key')
+        return jsonValue != null ? JSON.parse(jsonValue) : null
+    } catch (e) {
+        console.log(e)
+    }
+}

@@ -2,7 +2,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { useEffect, useState } from 'react'
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
-import { getPeople } from '../services'
+import { getData, getPeople, storeData } from '../services'
 
 export const List = () => {
     const { navigate } = useNavigation()
@@ -11,25 +11,37 @@ export const List = () => {
     const [people, setPeople] = useState([])
 
     useEffect(() => {
-        switch (params?.action) {
-            case 'create':
-                setPeople((prev) => [...prev, params.data])
-                break
-            case 'update':
-                setPeople((prev) => prev.map((p) => (p._id == params.data._id ? params.data : p)))
-                break
-            case 'delete':
-                setPeople((prev) => prev.filter((p) => p._id != params.data._id))
-                break
-            default:
-                getPeople()
-                    .then((json) => setPeople(json))
-                    .catch((e) => {
-                        alert("Couldn't fetch list of contacts")
-                        console.log('Error: ', e)
-                    })
-                break
-        }
+        ;(async () => {
+            switch (params?.action) {
+                case 'create':
+                    setPeople((prev) => [...prev, params.data])
+                    storeData(people)
+                    break
+                case 'update':
+                    setPeople((prev) =>
+                        prev.map((p) => (p._id == params.data._id ? params.data : p))
+                    )
+                    storeData(people)
+                    break
+                case 'delete':
+                    setPeople((prev) => prev.filter((p) => p._id != params.data._id))
+                    storeData(people)
+                    break
+                default:
+                    const cachedData = await getData()
+                    setPeople(cachedData)
+                    getPeople()
+                        .then((fetchedData) => {
+                            setPeople(fetchedData)
+                            storeData(fetchedData)
+                        })
+                        .catch((e) => {
+                            alert(e.message)
+                            console.log(e.message)
+                        })
+                    break
+            }
+        })()
     }, [params])
 
     return (
