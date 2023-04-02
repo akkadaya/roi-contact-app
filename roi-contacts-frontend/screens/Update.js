@@ -54,17 +54,15 @@ export const Update = () => {
     return (
         <ScrollView>
             <View style={styles.contentContainer}>
-                <View style>
-                    {fields.map((field, index) => (
-                        <FormField
-                            key={index}
-                            form={form}
-                            setForm={setForm}
-                            label={field.label}
-                            stateField={field.stateField}
-                        />
-                    ))}
-                </View>
+                {fields.map((field, index) => (
+                    <FormField
+                        key={index}
+                        form={form}
+                        setForm={setForm}
+                        label={field.label}
+                        stateField={field.stateField}
+                    />
+                ))}
                 <PrimaryButton
                     label={'Update'}
                     onPress={onSave}
@@ -81,14 +79,7 @@ export const Update = () => {
 const styles = StyleSheet.create({
     contentContainer: {
         marginTop: 20,
-        marginLeft: 20
-    },
-    label: {
-        fontSize: 16
-    },
-    textInput: {
-        maxWidth: 200,
-        borderRadius: 5,
-        borderWidth: 1
+        marginLeft: 20,
+        alignItems: 'center'
     }
 })

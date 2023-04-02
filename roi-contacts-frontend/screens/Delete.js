@@ -23,12 +23,10 @@ export const Delete = () => {
                 <SecondaryButton
                     onPress={submit}
                     label={'Delete'}
-                    style={{ width: '100%' }}
                 />
                 <PrimaryButton
                     onPress={navigation.goBack}
                     label={'Go Back'}
-                    style={{ width: '100%' }}
                 />
             </View>
         </View>

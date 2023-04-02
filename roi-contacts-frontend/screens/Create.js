@@ -78,6 +78,7 @@ export const Create = () => {
 const styles = StyleSheet.create({
     contentContainer: {
         marginTop: 20,
-        marginLeft: 20
+        marginLeft: 20,
+        alignItems: 'center'
     }
 })

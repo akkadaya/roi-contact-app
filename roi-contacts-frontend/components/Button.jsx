@@ -37,7 +37,8 @@ const styles = StyleSheet.create({
         padding: 10,
         alignItems: 'center',
         backgroundColor: 'green',
-        marginTop: 20
+        marginTop: 20,
+        width: '95%'
     },
     secondaryButton: {
         borderWidth: 1,
@@ -46,7 +47,8 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         padding: 10,
         alignItems: 'center',
-        backgroundColor: 'red'
+        backgroundColor: 'red',
+        width: '95%'
     },
     buttonLabel: {
         color: '#fff',

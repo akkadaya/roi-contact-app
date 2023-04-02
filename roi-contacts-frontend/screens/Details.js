@@ -54,7 +54,9 @@ ${person?.address?.country}`
 
 const styles = StyleSheet.create({
     contentContainer: {
-        margin: 20
+        margin: 20,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     header: {
         fontSize: 32,
@@ -63,7 +65,8 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
     detailsContainer: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        maxWidth: 400
     },
     labels: {
         width: 100

@@ -2,7 +2,7 @@ import { StyleSheet, Text, TextInput, View } from 'react-native'
 
 export const FormField = ({ form, setForm, label, stateField }) => {
     return (
-        <View>
+        <View style={styles.container}>
             <Text style={styles.label}>{label}</Text>
             <TextInput
                 style={styles.textInput}
@@ -14,15 +14,22 @@ export const FormField = ({ form, setForm, label, stateField }) => {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        width: '95%',
+        maxWidth: 300,
+        alignItems: 'center'
+    },
     label: {
         fontSize: 16,
         padding: 5,
         fontWeight: '600'
     },
     textInput: {
+        width: '100%',
         maxWidth: 200,
         borderRadius: 5,
         borderWidth: 1,
-        padding: 5
+        padding: 5,
+        textAlign: 'center'
     }
 })
